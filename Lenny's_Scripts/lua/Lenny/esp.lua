@@ -7,6 +7,21 @@ local entities = {
 }
 
 local function wallhack()
+		if GetConVarNumber("lenny_esp") == 1 then
+				for k, v in pairs (player.GetAll()) do
+						local plypos = (v:GetPos() + Vector(0,0,80)):ToScreen()
+						if v:IsAdmin() or v:IsSuperAdmin() then
+							draw.DrawText("" ..v:Name().. "[Admin]", "TabLarge", plypos.x, plypos.y, Color(220,60,90,255), 1)
+						else
+							draw.DrawText(v:Name(), "Trebuchet18", plypos.x, plypos.y, Color(255,255,255), 1)
+						end
+					end
+
+		end
+
+
+
+
 	if GetConVarNumber("lenny_esp_entities") == 1 then
 			for k, v1 in pairs (entities) do
 				for k, v in pairs (ents.FindByClass(v1)) do
@@ -17,19 +32,8 @@ local function wallhack()
 	end
 
 		
-	end
-	if GetConVarNumber("lenny_esp") == 1 then
-				for k, v in pairs (ents.GetAll()) do
-					if v:IsPlayer() then
-						local plypos = (v:GetPos() + Vector(0,0,80)):ToScreen()
-						if v:IsAdmin() or v:IsSuperAdmin() then
-							draw.DrawText("" ..v:Name().. "[Admin]", "TabLarge", plypos.x, plypos.y, Color(220,60,90,255), 1)
-						else
-							draw.DrawText(v:Name(), "Trebuchet18", plypos.x, plypos.y, Color(255,255,255), 1)
-						end
-					end
-	end
 end
+
 
 hook.Add("HUDPaint", "ESP", wallhack)
 
