@@ -11,63 +11,73 @@ end
 
 --Derma
 
-local DLabel3
-local DLabel2
-local FlspamCheckbox
-local BunnyCheckBox
+local entsesp_checkbox
+local espconfig_button
+local esp_checkbox
+local flashlight_checkbox
+local bunnyhop_checkbox
 local MainWindow
 
 MainWindow = vgui.Create('DFrame')
-MainWindow:SetSize(280, 159)
-MainWindow:Center()
-MainWindow:SetTitle("Lenny's Scripts")
+MainWindow:SetSize(270, 170)
+MainWindow:SetPos(0, 0)
+MainWindow:SetTitle("Lenny's  Utilities")
 MainWindow:SetSizable(true)
 MainWindow:SetDeleteOnClose(false)
 MainWindow:SetVisible(false)
+MainWindow:MakePopup()
 
-BunnyCheckBox = vgui.Create('DCheckBoxLabel')
-BunnyCheckBox:SetParent(MainWindow)
-BunnyCheckBox:SetPos(10, 69)
-BunnyCheckBox:SetText('Bunnyhop')
-BunnyCheckBox:SetValue(true)
-BunnyCheckBox:SetConVar("lenny_bunnyhop")
-BunnyCheckBox.DoClick = function() end
-BunnyCheckBox:SizeToContents()
+bunnyhop_checkbox = vgui.Create('DCheckBoxLabel')
+bunnyhop_checkbox:SetParent(MainWindow)
+bunnyhop_checkbox:SetPos(10, 40)
+bunnyhop_checkbox:SetText('Bunnyhop')
+bunnyhop_checkbox:SetValue(true)
+bunnyhop_checkbox:SetConVar("lenny_bunnyhop")
+bunnyhop_checkbox.DoClick = function() end
+bunnyhop_checkbox:SizeToContents()
 
-FlspamCheckbox = vgui.Create('DCheckBoxLabel')
-FlspamCheckbox:SetParent(MainWindow)
-FlspamCheckbox:SetPos(10, 99)
-FlspamCheckbox:SetText('Flashlight Spam')
-FlspamCheckbox:SetConVar("lenny_flashlight")
-FlspamCheckbox.DoClick = function() end
-FlspamCheckbox:SizeToContents()
+flashlight_checkbox = vgui.Create('DCheckBoxLabel')
+flashlight_checkbox:SetParent(MainWindow)
+flashlight_checkbox:SetPos(10, 70)
+flashlight_checkbox:SetText('Flashlight Spam')
+flashlight_checkbox:SetConVar("lenny_flashlight")
+flashlight_checkbox.DoClick = function() end
+flashlight_checkbox:SizeToContents()
 
-DLabel2 = vgui.Create('DLabel')
-DLabel2:SetParent(MainWindow)
-DLabel2:SetPos(130, 100)
-DLabel2:SetText('Hold "H" to spam the flahlight')
-DLabel2:SizeToContents()
+esp_checkbox = vgui.Create('DCheckBoxLabel')
+esp_checkbox:SetParent(MainWindow)
+esp_checkbox:SetPos(10, 95)
+esp_checkbox:SetText('Simple ESP with admin recognition')
+esp_checkbox:SetConVar("lenny_esp")
+esp_checkbox.DoClick = function() end
+esp_checkbox:SizeToContents()
 
-DLabel3 = vgui.Create('DLabel')
-DLabel3:SetParent(MainWindow)
-DLabel3:SetPos(130, 70)
-DLabel3:SetText('Hold space to bunnyhop')
-DLabel3:SizeToContents()
+entsesp_checkbox = vgui.Create('DCheckBoxLabel')
+entsesp_checkbox:SetParent(MainWindow)
+entsesp_checkbox:SetPos(30, 120)
+entsesp_checkbox:SetText('Printer/Entity Esp')
+entsesp_checkbox:SetConVar("lenny_esp_entities")
+entsesp_checkbox.DoClick = function() end
+entsesp_checkbox:SizeToContents()
 
-DCheckBox4 = vgui.Create('DCheckBoxLabel')
-DCheckBox4:SetParent(MainWindow)
-DCheckBox4:SetPos(10, 126)
-DCheckBox4:SetText('Simeple ESP +  admin recognition')
-DCheckBox4:SetConVar("lenny_esp")
-DCheckBox4.DoClick = function() end
-DCheckBox4:SizeToContents()
+espconfig_button = vgui.Create('DButton')
+espconfig_button:SetParent(MainWindow)
+espconfig_button:SetSize(70, 25)
+espconfig_button:SetPos(140, 115)
+espconfig_button:SetText('ESP Options')
+espconfig_button.DoClick = lenny_espconfig_open
+
+espconfig_textentry = vgui.Create('DTextEntry')
+espconfig_textentry:SetParent(MainWindow)
+espconfig_textentry:SetSize(205, 20)
+espconfig_textentry:SetPos(5, 145)
 
 
-concommand.Add("lenny_menu", Lenny_Menu)
+concommand.Add("lenny_menu", lenny_Menu)
+concommand.Add("lenny_espconfig", lenny_espconfig_open)
 
-function Lenny_Menu()
 
-
+function lenny_Menu()
 	MainWindow:SetVisible(true)
-	surface.CreateFont ("MenuLarge", ScreenScale(20), 400, true, false, "MenuSmall")
 end
+
