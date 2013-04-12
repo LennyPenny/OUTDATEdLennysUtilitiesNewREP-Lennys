@@ -1,12 +1,17 @@
 CreateClientConVar("lenny_esp", 0, true, false)
 CreateClientConVar("lenny_esp_entities", 0, true, false)
 
+local playeraim = Vector(100,100,100):ToScreen()
+
 
 local entities = {
 	"money_printer",
 }
 
 local function wallhack()
+
+
+
 		if GetConVarNumber("lenny_esp") == 1 then
 				for k, v in pairs (player.GetAll()) do
 						local plypos = (v:GetPos() + Vector(0,0,80)):ToScreen()
@@ -26,7 +31,7 @@ local function wallhack()
 			for k, v1 in pairs (entities) do
 				for k, v in pairs (ents.FindByClass(v1)) do
 					local plypos = (v:GetPos() + Vector(0,0,20)):ToScreen()
-					draw.DrawText( v1, "Trebuchet18", plypos.x, plypos.y, Color(200,100,50), 1)
+					draw.DrawText( v1, "Trebuchet18", plypos.x, plypos.y, Color(255,193,37), 1)
 				end
 			end
 	end
@@ -39,12 +44,13 @@ hook.Add("HUDPaint", "ESP", wallhack)
 
 --Derma
 
+
 local DLabel5
 local DLabel4
 local DLabel3
 local DLabel2
 local espconfig_textentry
-local espconfig_list
+
 
 espconfig_frame = vgui.Create('DFrame')
 espconfig_frame:SetSize(215, 410)
@@ -62,6 +68,8 @@ espconfig_list:SetPos(5, 170)
 espconfig_list:AddColumn("Class Name")
 espconfig_list.OnClickLine = function()
 	table.remove(entities, espconfig_list:GetSelectedLine())
+	espconfig_list:Clear()
+	updatelist()
 end
 
 classlist_button = vgui.Create('DButton')
@@ -69,13 +77,8 @@ classlist_button:SetParent(espconfig_frame)
 classlist_button:SetSize(70, 25)
 classlist_button:SetPos(5, 115)
 classlist_button:SetText('Update')
-classlist_button.DoClick = function()
-	espconfig_list:Clear()
-	for k, v in pairs(entities) do
-		espconfig_list:AddLine(v)
-	end
+classlist_button.DoClick = updatelist
 
-end
 
 
 espconfig_textentry = vgui.Create('DTextEntry')
@@ -83,8 +86,9 @@ espconfig_textentry:SetParent(espconfig_frame)
 espconfig_textentry:SetSize(205, 20)
 espconfig_textentry:SetPos(5, 145)
 espconfig_textentry.OnEnter = function()
-	print("works")
 	table.insert(entities, espconfig_textentry:GetValue())
+	updatelist()
+
 end
 
 
@@ -112,6 +116,18 @@ DLabel5:SetPos(10, 70)
 DLabel5:SetText('to the textbox below and hit enter.')
 DLabel5:SizeToContents()
 
+
+function updatelist()
+		espconfig_list:Clear()
+	for k, v in pairs(entities) do
+		espconfig_list:AddLine(v)
+	end
+end
+
+
+
+
 function lenny_espconfig_open()
 	espconfig_frame:SetVisible(true)
+	updatelist()
 end

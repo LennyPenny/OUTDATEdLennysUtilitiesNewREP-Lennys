@@ -3,10 +3,13 @@ local function ReloadLennys()
 end
 concommand.Add("lenny_reload", ReloadLennys)
 
+
+
 local files, folders = file.Find("lua/Lenny/*.lua", "GAME")
 for k, v in pairs(files) do
 	include("Lenny/" .. v)
 end
+
 
 
 --Derma
@@ -19,7 +22,7 @@ local bunnyhop_checkbox
 local MainWindow
 
 MainWindow = vgui.Create('DFrame')
-MainWindow:SetSize(270, 170)
+MainWindow:SetSize(270, 180)
 MainWindow:SetPos(0, 0)
 MainWindow:SetTitle("Lenny's  Utilities")
 MainWindow:SetSizable(true)
@@ -67,10 +70,23 @@ espconfig_button:SetPos(140, 115)
 espconfig_button:SetText('ESP Options')
 espconfig_button.DoClick = lenny_espconfig_open
 
-espconfig_textentry = vgui.Create('DTextEntry')
-espconfig_textentry:SetParent(MainWindow)
-espconfig_textentry:SetSize(205, 20)
-espconfig_textentry:SetPos(5, 145)
+spamconfig_button = vgui.Create('DButton')
+spamconfig_button:SetParent(MainWindow)
+spamconfig_button:SetSize(80, 25)
+spamconfig_button:SetPos(140, 145)
+spamconfig_button:SetText('Spam Options')
+spamconfig_button.DoClick = lenny_chatspamopen
+
+chatspamcheckbox = vgui.Create('DCheckBoxLabel')
+chatspamcheckbox:SetParent(MainWindow)
+chatspamcheckbox:SetPos(10, 150)
+chatspamcheckbox:SetText('Chatspam')
+chatspamcheckbox:SetConVar("lenny_chatspam")
+chatspamcheckbox.DoClick = function()
+end
+chatspamcheckbox:SizeToContents()
+
+
 
 
 concommand.Add("lenny_menu", lenny_Menu)
