@@ -13,14 +13,36 @@ local function wallhack()
 
 
 		if GetConVarNumber("lenny_esp") == 1 then
+
+				/*local targeted = LocalPlayer():GetEyeTrace().Entity
+
+
+				if targeted:IsPlayer() then
+					local targetpos = targeted:GetPos():ToScreen()
+					draw.DrawText(targeted:GetActiveWeapon():GetClass(), "Trebuchet18", targetpos.x, targetpos.y - 70, Color(255,255,255), 1)
+				end*/
+
 				for k, v in pairs (player.GetAll()) do
-						local plypos = (v:GetPos() + Vector(0,0,80)):ToScreen()
-						if v:IsAdmin() or v:IsSuperAdmin() then
-							draw.DrawText("" ..v:Name().. "[Admin]", "TabLarge", plypos.x, plypos.y, Color(220,60,90,255), 1)
-						else
-							draw.DrawText(v:Name(), "Trebuchet18", plypos.x, plypos.y, Color(255,255,255), 1)
-						end
+
+
+					if LocalPlayer():Alive() and v:Alive() then
+					 	vdis = (v:GetPos() - LocalPlayer():GetPos()):Length()
+					else
+						vdis = nil
 					end
+
+
+					local plypos = (v:GetPos() + Vector(0,0,100)):ToScreen()
+					if v:IsAdmin() or v:IsSuperAdmin() then
+						draw.DrawText("" ..v:Name().. "[Admin]", "TabLarge", plypos.x, plypos.y, Color(220,60,90,255), 1)
+					else
+						draw.DrawText(v:Name(), "Trebuchet18", plypos.x, plypos.y, Color(255,255,255), 1)
+					end
+
+					if (vdis != nil) and (vdis <= 400) then
+						draw.DrawText(v:GetActiveWeapon():GetClass(), "Trebuchet18", plypos.x, plypos.y + 10, Color(255,255,255), 1)
+					end
+				end
 
 		end
 
@@ -72,12 +94,7 @@ espconfig_list.OnClickLine = function()
 	updatelist()
 end
 
-classlist_button = vgui.Create('DButton')
-classlist_button:SetParent(espconfig_frame)
-classlist_button:SetSize(70, 25)
-classlist_button:SetPos(5, 115)
-classlist_button:SetText('Update')
-classlist_button.DoClick = updatelist
+
 
 
 

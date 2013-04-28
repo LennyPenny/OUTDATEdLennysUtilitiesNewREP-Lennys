@@ -2,7 +2,7 @@
 
 -- DarkRP NameChanger
 
-local names = {        -- Simply add/remove/modify this list if you want more/less/other names
+/*local names!!!!OLD!!!! = {        -- Simply add/remove/modify this list if you want more/less/other names
 "Peter Maffai", 
 "Michael Jackson", 
 "Thomas McGee", 
@@ -29,11 +29,62 @@ local names = {        -- Simply add/remove/modify this list if you want more/le
 "Grufer Hump", 
 
 }
+*/
+
+local firstnames = {
+	
+"Nickolas",
+"Geoffrey",
+"Chauncey",
+"Kendall",
+"Timothy",
+"Anthony",
+"Enrique",
+"Gonzalo",
+"Winford",
+"Hilton",
+"Jimmie",
+"Claude",
+"Lavern",
+"Danial",
+"Milton",
+"Alonzo",
+"Leland",
+"Arnold",
+"Genaro",
+"Jamaal",
+"Morris",
+"Rodger",
+"Barney",
+"Lyman",
+"Abdul",
+"Dante",
+"Ethan",
+"Julio",
+"Jimmy",
+"Vince",
+"Elton",
+"Cyril",
+"Rocky"
+}
+
+local lastnames = {
+"Hambarzumjan-landry",
+"Kelley-milburn",
+"Pagliaricci",
+"Thierfelder",
+"Wanderstock",
+"Chakravarti",
+"Rudenstine",
+"Peregrino",
+"Hallowell",
+"Roskowick"
+}
 
 
 
 concommand.Add( "lenny_namechange" , function()
-LocalPlayer():ConCommand("say /rpname " ..table.Random(names).. "")
+LocalPlayer():ConCommand("say /rpname " ..table.Random(firstnames).. " " .. table.Random(lastnames))
 
 
 

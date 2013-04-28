@@ -3,7 +3,7 @@ local function ReloadLennys()
 end
 concommand.Add("lenny_reload", ReloadLennys)
 
-
+ply = LocalPlayer()
 
 local files, folders = file.Find("lua/Lenny/*.lua", "GAME")
 for k, v in pairs(files) do
