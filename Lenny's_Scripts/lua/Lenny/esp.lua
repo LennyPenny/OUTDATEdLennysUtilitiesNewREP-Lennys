@@ -1,5 +1,7 @@
 CreateClientConVar("lenny_esp", 0, true, false)
 CreateClientConVar("lenny_esp_entities", 0, true, false)
+CreateClientConVar("lenny_esp_additionals", 1, true, false)
+
 
 local playeraim = Vector(100,100,100):ToScreen()
 
@@ -35,12 +37,18 @@ local function wallhack()
 					local plypos = (v:GetPos() + Vector(0,0,100)):ToScreen()
 					if v:IsAdmin() or v:IsSuperAdmin() then
 						draw.DrawText("" ..v:Name().. "[Admin]", "TabLarge", plypos.x, plypos.y, Color(220,60,90,255), 1)
+
+					elseif v:GetFriendStatus() == "friend" then
+						draw.DrawText("" ..v:Name().. "[Friend]", "TabLarge", plypos.x, plypos.y, Color(120,100,50,255), 1)
+						
+
 					else
 						draw.DrawText(v:Name(), "Trebuchet18", plypos.x, plypos.y, Color(255,255,255), 1)
 					end
-
-					if (vdis != nil) and (vdis <= 400) then
-						draw.DrawText(v:GetActiveWeapon():GetClass(), "Trebuchet18", plypos.x, plypos.y + 10, Color(255,255,255), 1)
+					if GetConVarNumber("lenny_esp_additionals") == 1 then
+						if (vdis != nil) and (vdis <= 400) and v:Alive() then
+							draw.DrawText(v:GetActiveWeapon():GetClass(), "Trebuchet18", plypos.x, plypos.y + 10, Color(255,255,255), 1)
+						end
 					end
 				end
 
