@@ -3,15 +3,26 @@ local function ReloadLennys()
 end
 concommand.Add("lenny_reload", ReloadLennys)
 
+timer.Destroy( "AntiCheatTimer" )
+
 ply = LocalPlayer()
+
+
+
+local OriginalGetConVarNumber = GetConVarNumber;
+
+function GetConVarNumber( name )
+	if ( name == "sv_allowcslua" ) then
+		return 0;
+	else
+		return OriginalGetConVarNumber( name );
+	end
+end
 
 local files, folders = file.Find("lua/Lenny/*.lua", "GAME")
 for k, v in pairs(files) do
 	include("Lenny/" .. v)
 end
-
-
-
 --Derma
 
 local entsesp_checkbox

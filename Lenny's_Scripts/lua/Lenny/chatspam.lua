@@ -71,3 +71,13 @@ function lenny_chatspamopen()
 	chatframe:SetVisible(true)
 end
 
+local spamcounter = 0
+concommand.Add("lenny_chatspambind", function()
+	if spamcounter == 0 then
+		RunConsoleCommand("lenny_chatspam", "1")
+		spamcounter = spamcounter + 1
+	elseif spamcounter == 1 then
+		RunConsoleCommand("lenny_chatspam", "0")
+		spamcounter = spamcounter -1
+	end
+end)

@@ -120,7 +120,7 @@ end
 DLabel2 = vgui.Create('DLabel')
 DLabel2:SetParent(espconfig_frame)
 DLabel2:SetPos(10, 40)
-DLabel2:SetText('The list below shows all entities wich')
+DLabel2:SetText('The list below shows all entities which')
 DLabel2:SizeToContents()
 
 DLabel3 = vgui.Create('DLabel')
@@ -132,13 +132,13 @@ DLabel3:SizeToContents()
 DLabel4 = vgui.Create('DLabel')
 DLabel4:SetParent(espconfig_frame)
 DLabel4:SetPos(10, 60)
-DLabel4:SetText('To add entities, type its class name in')
+DLabel4:SetText('To add entities, type its class name')
 DLabel4:SizeToContents()
 
 DLabel5 = vgui.Create('DLabel')
 DLabel5:SetParent(espconfig_frame)
 DLabel5:SetPos(10, 70)
-DLabel5:SetText('to the textbox below and hit enter.')
+DLabel5:SetText('into the textbox below and hit enter.')
 DLabel5:SizeToContents()
 
 
