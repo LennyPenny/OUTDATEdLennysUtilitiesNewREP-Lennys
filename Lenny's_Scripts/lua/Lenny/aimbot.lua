@@ -16,28 +16,33 @@ local function aimbot()
 		end
 	end
 end
+
+
 local function aimbotadv()
-
-
-
-
-
 	if GetConVarNumber("lenny_aimbotadv") == 1 then
-		for k, v in pairs(player.GetAll()) do
-			if LocalPlayer():Alive() and v:Alive() then
-				vdis = (v:GetPos() - LocalPlayer():GetPos()):Length()
-			else
-				vdis = nil
-			end
-
-			if (vdis != nil) and (vdis <= 400) then
-				local ply = LocalPlayer()
-				local head = v:LookupBone("ValveBiped.Bip01_Head1")
-				local headpos,headang = v:GetBonePosition(head)
-				ply:SetEyeAngles((headpos - ply:GetShootPos()):Angle())
-			end
-			
+		function TableSortByDistance( former, latter )
+			return latter:GetPos():Distance( LocalPlayer():GetPos() ) > former:GetPos():Distance( LocalPlayer():GetPos() ) 
 		end
+		playerss = {}
+		function GetPlayersByDistance( )
+		local players = player.GetAll()
+		table.sort( players, TableSortByDistance )
+		return players
+		end
+
+		if GetPlayersByDistance()[2]:Health() > 0 and GetPlayersByDistance()[2]:Alive() then
+			local ply = LocalPlayer()
+			local head = GetPlayersByDistance()[2]:LookupBone("ValveBiped.Bip01_Head1")
+			local headpos,headang = GetPlayersByDistance()[2]:GetBonePosition(head)
+			ply:SetEyeAngles((headpos - ply:GetShootPos()):Angle())
+		end
+		/*
+		if (vdis <= 800) and vdis != 0 then
+			local ply = LocalPlayer()
+			local head = players[1]:LookupBone("ValveBiped.Bip01_Head1")
+			local headpos,headang = players[1]:GetBonePosition(head)
+			ply:SetEyeAngles((headpos - ply:GetShootPos()):Angle()) )
+		end */
 	end
 end
 
@@ -45,3 +50,4 @@ end
 
 hook.Add("Think", "Aimbotty", aimbot)
 hook.Add("Think", "Aimbott2y", aimbotadv)
+

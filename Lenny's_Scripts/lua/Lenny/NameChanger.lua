@@ -31,6 +31,9 @@
 }
 */
 
+CreateClientConVar("lenny_gamernicks", 0, true, false)
+
+
 local firstnames = { -- 131 total
 	
 "Christopher",			-- Simply add/remove/modify these lists if you want more/less/other names
@@ -355,7 +358,118 @@ local lastnames = { -- 187 total
 "Cox",
 "Day"
 }
+
+
+gamernicks = {
+"Peace_in_the_world5",
+"umbrella_tears",
+"krzymandileigh",
+"ShoveASockinit",
+"GuardiaNzPriDe",
+"Never_Too_Late",
+"gangangaguinga",
+"digital-lemon",
+"xsilvaxstormx",
+"cold-fusion",
+"Yoshimitshu",
+"IRIUILIEIZI",
+"Royal_Flush",
+"Shadowrider",
+"ningthemcha",
+"FakeDeath5",
+"Armageddon",
+"Tarro_Kong",
+"riot_chase",
+"Dudutxsuio",
+"TheBleeder",
+"gabritorag",
+"Timetanis",
+"AnacondAX",
+"Astaroth_",
+"Bsd-Noooo",
+"mrdamaged",
+"AlphaKilr",
+"Bsd-Noobz",
+"Blackbyte",
+"Berthold",
+"BrEtTmAn",
+"Apansfds",
+"Chimpanz",
+"BaRFSTeR",
+"AiOROS--",
+"CanWood_",
+"Aqualuna",
+"onoffon4",
+"Daharman",
+"jjpimpin",
+"Sinadrin",
+"GoToHell",
+"Bernardo",
+"Biscuit",
+"chansey",
+"pyrocat",
+"takeshi",
+"BaRFMaN",
+"Applets",
+"samsoma",
+"tunchie",
+"Alteran",
+"BinGo_G",
+"TzApAsA",
+"CanWood",
+"Adriaan",
+"canaan",
+"Kolten",
+"Soumya",
+"BSDBoy",
+"Burps_",
+"Xisorz",
+"Ogloka",
+"Captus",
+"Akisha",
+"Midori",
+"ZELDAK",
+"Mayank",
+"BanTam",
+"Kaskus",
+"cReePs",
+"mbzta",
+"Chasm",
+"Nicho",
+"Blade",
+"Binny",
+"Dellk",
+"AK-47",
+"lance",
+"LALIT",
+"luxen",
+"CapaH",
+"AliNZ",
+"cmang",
+"Chassea",
+"Burga",
+"Asard",
+"ZaKiR",
+"Allax",
+"Skim",
+"arun",
+"SaBa",
+"MUNA",
+"raja",
+"Khan",
+"Bloc",
+"Lyon",
+"kim",
+"FAB"
+}
+
+
+
 concommand.Add( "lenny_namechange" , function()
-	LocalPlayer():ConCommand("say /rpname " ..table.Random(firstnames).. " " .. table.Random(lastnames)) -- 131 * 187 = 24497 total possible names!!
-end )
+	if GetConVarNumber("lenny_gamernicks") == 0 then
+		LocalPlayer():ConCommand("say /rpname " ..table.Random(firstnames).. " " .. table.Random(lastnames)) -- 131 * 187 = 24497 total possible names!!
+	elseif GetConVarNumber("lenny_gamernicks") == 1 then
+		LocalPlayer():ConCommand("say /rpname " ..table.Random(gamernicks))
+	end
+end)
 

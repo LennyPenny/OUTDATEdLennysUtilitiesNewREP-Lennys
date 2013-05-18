@@ -2,15 +2,11 @@ CreateClientConVar("lenny_esp", 0, true, false)
 CreateClientConVar("lenny_esp_entities", 0, true, false)
 CreateClientConVar("lenny_esp_additionals", 1, true, false)
 
-
-local playeraim = Vector(100,100,100):ToScreen()
-
-
 local entities = {
 	"money_printer",
 }
 
-local function wallhack()
+local function eespe()
 
 
 
@@ -30,7 +26,7 @@ local function wallhack()
 					if LocalPlayer():Alive() and v:Alive() then
 					 	vdis = (v:GetPos() - LocalPlayer():GetPos()):Length()
 					else
-						vdis = nil
+						vdis = 0
 					end
 
 
@@ -39,14 +35,14 @@ local function wallhack()
 						draw.DrawText("" ..v:Name().. "[Admin]", "TabLarge", plypos.x, plypos.y, Color(220,60,90,255), 1)
 
 					elseif v:GetFriendStatus() == "friend" then
-						draw.DrawText("" ..v:Name().. "[Friend]", "TabLarge", plypos.x, plypos.y, Color(120,100,50,255), 1)
+						draw.DrawText("" ..v:Name().. "[Friend]", "TabLarge", plypos.x, plypos.y, Color(0,255,0,255), 1)
 						
 
 					else
 						draw.DrawText(v:Name(), "Trebuchet18", plypos.x, plypos.y, Color(255,255,255), 1)
 					end
 					if GetConVarNumber("lenny_esp_additionals") == 1 then
-						if (vdis != nil) and (vdis <= 400) and v:Alive() then
+						if (vdis != nil) and (vdis != 0) and (vdis <= 400) and v:Alive() then
 							draw.DrawText(v:GetActiveWeapon():GetClass(), "Trebuchet18", plypos.x, plypos.y + 10, Color(255,255,255), 1)
 						end
 					end
@@ -70,7 +66,7 @@ local function wallhack()
 end
 
 
-hook.Add("HUDPaint", "ESP", wallhack)
+hook.Add("HUDPaint", "EESPE", eespe)
 
 --Derma
 
