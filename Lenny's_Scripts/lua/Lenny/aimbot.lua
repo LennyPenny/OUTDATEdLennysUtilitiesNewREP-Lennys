@@ -11,7 +11,9 @@ local function aimbot()
 			if target:IsPlayer() or target:IsNPC() then
 				local head = target:LookupBone("ValveBiped.Bip01_Head1")
 				local headpos,headang = target:GetBonePosition(head)
-				ply:SetEyeAngles((headpos - ply:GetShootPos()):Angle())
+				if LocalPlayer():KeyDown(IN_ATTACK) then
+					ply:SetEyeAngles((headpos - ply:GetShootPos()):Angle())
+				end
 			end
 		end
 	end

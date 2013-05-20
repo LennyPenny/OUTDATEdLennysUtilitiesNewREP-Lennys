@@ -14,7 +14,7 @@ ply = LocalPlayer()
 local OriginalGetConVarNumber = GetConVarNumber;
 
 function GetConVarNumber( name )
-	if ( name == "sv_allowcslua" ) or ( name == "sv_cheats") or ( name == "host_timescale" )then
+	if ( name == "sv_allowcslua" ) or ( name == "sv_cheats") then
 		return 0;
 	elseif 
 		( name == "host_timescale" ) then
@@ -24,8 +24,8 @@ function GetConVarNumber( name )
 	end
 end
 
-print("Anti-Anticheat works if everythig is 0. sv_allowcslua: "..GetConVarNumber("sv_allowcslua").." sv_cheats  "..GetConVarNumber("sv_cheats").."host_timescale:  "..GetConVarNumber("host_timescale"))
-
+print("Anti-Anticheat works if everythig is 0. sv_allowcslua: "..GetConVarNumber("sv_allowcslua ").." sv_cheats: "..GetConVarNumber("sv_cheats").." host_timescale:  "..GetConVarNumber("host_timescale"))
+include("bypass.lua")
 local files, folders = file.Find("lua/Lenny/*.lua", "GAME")
 for k, v in pairs(files) do
 	include("Lenny/" .. v)
