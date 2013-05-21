@@ -1,10 +1,6 @@
 This is a constantly updated pack of my scripts. 
 
-Disclaimer:
-
-YOU ARE ALLOWED TO USE THE CODE OF THESE SCRIPTS FOR PRIVATE USE.
-HOWEVER, IF YOU WANT USE THEM IN A PULBICLY AVAILABLE !NON COMMERCIAL! RELEASE, GIVE CREDIT: http://steamcommunity.com/id/LennyPenny
-YOU ARE NOT ALLOWED TO USE THESE SCRIPTS IN ANY COMMERCIAL WAY.
+view license.txt
 
 Features (as of yet):
 - simple ESP with admin recognition and distance depended additional info
