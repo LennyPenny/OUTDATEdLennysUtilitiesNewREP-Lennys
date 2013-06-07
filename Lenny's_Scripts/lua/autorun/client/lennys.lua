@@ -1,3 +1,4 @@
+CreateClientConVar("lenny_cvar3", 0, true, false)
 local function ReloadLennys()
 	include("autorun/client/Lennys.lua")
 end
@@ -25,11 +26,37 @@ function GetConVarNumber( name )
 end
 
 print("Anti-Anticheat works if everythig is 0. sv_allowcslua: "..GetConVarNumber("sv_allowcslua ").." sv_cheats: "..GetConVarNumber("sv_cheats").." host_timescale:  "..GetConVarNumber("host_timescale"))
-include("bypass.lua")
+
+local GetTable = hook.GetTable;
+
+function hook.GetTable()
+	local hooks = table.Copy( GetTable() );
+	
+	for k, v in pairs( hooks ) do
+		hooks[k] = {};
+	end
+	
+	return hooks;
+end
+
+
+
+
+
+
 local files, folders = file.Find("lua/Lenny/*.lua", "GAME")
 for k, v in pairs(files) do
 	include("Lenny/" .. v)
 end
+
+local files2, folders2 = file.Find("lua/lennycvar3/*.lua", "GAME")
+for k, v in pairs(files2) do
+	if GetConVarNumber("lenny_cvar3") == 1 then
+		include("lennycvar3/" .. v)
+	end
+end
+
+
 --Derma
 
 local entsesp_checkbox

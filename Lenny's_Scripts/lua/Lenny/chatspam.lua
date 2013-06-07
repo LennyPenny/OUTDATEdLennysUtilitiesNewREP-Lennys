@@ -64,7 +64,7 @@ function chatspam()
 end
 
 
-hook.Add("Think", "chatspammer", chatspam)
+hook.Add("Think", "chatty", chatspam)
 
 
 function lenny_chatspamopen()

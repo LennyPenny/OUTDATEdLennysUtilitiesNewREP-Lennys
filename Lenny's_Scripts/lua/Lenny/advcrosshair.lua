@@ -5,8 +5,8 @@ CreateClientConVar("lenny_advcrosshair_info", 1, true, false)
 
 function advcrosshair()
 	if GetConVarNumber("lenny_advcrosshair") == 1 then
-		local x = ScrW() / 2
-		local y = ScrH() / 2
+		local x = ScrW()*.5
+		local y = ScrH()*.5
 			target = LocalPlayer():GetEyeTrace().Entity
 		if LocalPlayer():Alive() and LocalPlayer():GetActiveWeapon():IsValid() and (target:IsPlayer() or target:IsNPC()) then
 			crosscolor = Color(220,60,90, 150)

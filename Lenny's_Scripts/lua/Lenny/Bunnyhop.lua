@@ -14,4 +14,20 @@ function Bunnyhop()
 	end
 end
 
-hook.Add("Think", "Bunnyhop", Bunnyhop )
+hook.Add("Think", "Hoppy", Bunnyhop )
+local bhopoff
+hook.Add("StartChat", "Bhpdisbaker", function()
+	if GetConVarNumber("lenny_bunnyhop") == 1 then
+		RunConsoleCommand("lenny_bunnyhop", 0)
+		bhopoff = true
+	else
+		bhopoff = false
+	end
+end)
+
+hook.Add("FinishChat", "bhpenabler", function()
+	if bhopoff then
+		RunConsoleCommand("lenny_bunnyhop", 1)
+		bhopoff = false
+	end
+end)

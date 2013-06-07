@@ -3,22 +3,17 @@ CreateClientConVar("lenny_esp_entities", 0, true, false)
 CreateClientConVar("lenny_esp_additionals", 1, true, false)
 
 local entities = {
-	"money_printer",
+	"printer",
+	"shipment",
+	"gunlab",
+	"spawned_weapon"
 }
 
 local function eespe()
-
+vdis = 1
 
 
 		if GetConVarNumber("lenny_esp") == 1 then
-
-				/*local targeted = LocalPlayer():GetEyeTrace().Entity
-
-
-				if targeted:IsPlayer() then
-					local targetpos = targeted:GetPos():ToScreen()
-					draw.DrawText(targeted:GetActiveWeapon():GetClass(), "Trebuchet18", targetpos.x, targetpos.y - 70, Color(255,255,255), 1)
-				end*/
 
 				for k, v in pairs (player.GetAll()) do
 
@@ -42,24 +37,32 @@ local function eespe()
 						draw.DrawText(v:Name(), "Trebuchet18", plypos.x, plypos.y, Color(255,255,255), 1)
 					end
 					if GetConVarNumber("lenny_esp_additionals") == 1 then
-						if (vdis != nil) and (vdis != 0) and (vdis <= 400) and v:Alive() then
+						if vdis and vdis <= 400 and v:Alive() then
 							draw.DrawText(v:GetActiveWeapon():GetClass(), "Trebuchet18", plypos.x, plypos.y + 10, Color(255,255,255), 1)
 						end
 					end
 				end
-
 		end
 
 
 
 
 	if GetConVarNumber("lenny_esp_entities") == 1 then
-			for k, v1 in pairs (entities) do
-				for k, v in pairs (ents.FindByClass(v1)) do
-					local plypos = (v:GetPos() + Vector(0,0,20)):ToScreen()
-					draw.DrawText( v1, "Trebuchet18", plypos.x, plypos.y, Color(255,193,37), 1)
+			for k3, a3 in pairs(ents.GetAll()) do
+				for _, names in pairs(entities) do
+					if string.find(string.lower(tostring(a3:GetClass())), tostring(names)) then
+						if names == "shipment" then
+							local plypos = (a3:GetPos() + Vector(0,0,20)):ToScreen()
+							draw.DrawText(CustomShipments[a3:Getcontents()].name.." shipment", "Trebuchet18", plypos.x, plypos.y, Color(255,193,37), 1)
+						else
+							local plypos = (a3:GetPos() + Vector(0,0,20)):ToScreen()
+							draw.DrawText(a3:GetClass(), "Trebuchet18", plypos.x, plypos.y, Color(255,193,37), 1)
+						end
+					end	
 				end
 			end
+
+
 	end
 
 		
