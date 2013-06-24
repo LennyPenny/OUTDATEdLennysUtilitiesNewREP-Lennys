@@ -10,64 +10,49 @@ local entities = {
 }
 
 local function eespe()
-vdis = 1
-
-
-		if GetConVarNumber("lenny_esp") == 1 then
-
-				for k, v in pairs (player.GetAll()) do
-
-
-					if LocalPlayer():Alive() and v:Alive() then
-					 	vdis = (v:GetPos() - LocalPlayer():GetPos()):Length()
-					else
-						vdis = 0
-					end
-
-
-					local plypos = (v:GetPos() + Vector(0,0,100)):ToScreen()
-					if v:IsAdmin() or v:IsSuperAdmin() then
-						draw.DrawText("" ..v:Name().. "[Admin]", "TabLarge", plypos.x, plypos.y, Color(220,60,90,255), 1)
-
-					elseif v:GetFriendStatus() == "friend" then
-						draw.DrawText("" ..v:Name().. "[Friend]", "TabLarge", plypos.x, plypos.y, Color(0,255,0,255), 1)
-						
-
-					else
-						draw.DrawText(v:Name(), "Trebuchet18", plypos.x, plypos.y, Color(255,255,255), 1)
-					end
-					if GetConVarNumber("lenny_esp_additionals") == 1 then
-						if vdis and vdis <= 400 and v:Alive() then
-							draw.DrawText(v:GetActiveWeapon():GetClass(), "Trebuchet18", plypos.x, plypos.y + 10, Color(255,255,255), 1)
-						end
-					end
+local vdis = 1
+	for k, v in pairs(ents.GetAll()) do
+		if v:IsPlayer() then
+			if GetConVarNumber("lenny_esp") == 1 then
+				if LocalPlayer():Alive() and v:Alive() then
+					 vdis = (v:GetPos() - LocalPlayer():GetPos()):Length()
+				else
+					vdis = 0
 				end
-		end
+					
+				local plypos = (v:GetPos() + Vector(0,0,100)):ToScreen()
 
+				if v:IsAdmin() or v:IsSuperAdmin() then
+					draw.DrawText("" ..v:Name().. "[Admin]", "TabLarge", plypos.x, plypos.y, Color(220,60,90,255), 1)
 
-
-
-	if GetConVarNumber("lenny_esp_entities") == 1 then
-			for k3, a3 in pairs(ents.GetAll()) do
-				for _, names in pairs(entities) do
-					if string.find(string.lower(tostring(a3:GetClass())), tostring(names)) then
-						if names == "shipment" then
-							local plypos = (a3:GetPos() + Vector(0,0,20)):ToScreen()
-							draw.DrawText(CustomShipments[a3:Getcontents()].name.." shipment", "Trebuchet18", plypos.x, plypos.y, Color(255,193,37), 1)
-						else
-							local plypos = (a3:GetPos() + Vector(0,0,20)):ToScreen()
-							draw.DrawText(a3:GetClass(), "Trebuchet18", plypos.x, plypos.y, Color(255,193,37), 1)
-						end
-					end	
+				elseif v:GetFriendStatus() == "friend" then
+					draw.DrawText("" ..v:Name().. "[Friend]", "TabLarge", plypos.x, plypos.y, Color(0,255,0,255), 1)
+				else
+					draw.DrawText(v:Name(), "Trebuchet18", plypos.x, plypos.y, Color(255,255,255), 1)
+				end
+				if GetConVarNumber("lenny_esp_additionals") == 1 then
+					if v:Alive() and vdis and vdis <= 400 then
+						draw.DrawText(v:GetActiveWeapon():GetClass(), "Trebuchet18", plypos.x, plypos.y + 10, Color(255,255,255), 1)
+					end
 				end
 			end
-
-
+		else
+			if GetConVarNumber("lenny_esp_entities") == 1 then
+				for _, names in pairs(entities) do
+					if string.find(string.lower(tostring(v:GetClass())), tostring(names)) then
+						if names == "shipment" then
+							local plypos = (v:GetPos() + Vector(0,0,20)):ToScreen()
+							draw.DrawText(CustomShipments[v:Getcontents()].name.." shipment", "Trebuchet18", plypos.x, plypos.y, Color(255,193,37), 1)
+						else
+							local plypos = (v:GetPos() + Vector(0,0,20)):ToScreen()
+							draw.DrawText(v:GetClass(), "Trebuchet18", plypos.x, plypos.y, Color(255,193,37), 1)
+						end
+					end
+				end
+			end
+		end
 	end
-
-		
 end
-
 
 hook.Add("HUDPaint", "EESPE", eespe)
 
@@ -141,7 +126,7 @@ DLabel5:SetText('into the textbox below and hit enter.')
 DLabel5:SizeToContents()
 
 
-function updatelist()
+local function updatelist()
 		espconfig_list:Clear()
 	for k, v in pairs(entities) do
 		espconfig_list:AddLine(v)
@@ -151,7 +136,7 @@ end
 
 
 
-function lenny_espconfig_open()
+local function lenny_espconfig_open()
 	espconfig_frame:SetVisible(true)
 	updatelist()
 end
