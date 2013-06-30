@@ -1,6 +1,6 @@
 CreateClientConVar("lenny_esp", 0, true, false)
 CreateClientConVar("lenny_esp_entities", 0, true, false)
-CreateClientConVar("lenny_esp_additionals", 1, true, false)
+CreateClientConVar("lenny_esp_additionals", 0, true, false)
 
 local entities = {
 	"printer",
@@ -21,11 +21,12 @@ local vdis = 1
 				end
 					
 				local plypos = (v:GetPos() + Vector(0,0,100)):ToScreen()
-
+				
+				local plyps = v:GetPos():ToScreen()
 				if v:IsAdmin() or v:IsSuperAdmin() then
 					draw.DrawText("" ..v:Name().. "[Admin]", "TabLarge", plypos.x, plypos.y, Color(220,60,90,255), 1)
-
 				elseif v:GetFriendStatus() == "friend" then
+					surface.SetDrawColor(0,255,0,255)
 					draw.DrawText("" ..v:Name().. "[Friend]", "TabLarge", plypos.x, plypos.y, Color(0,255,0,255), 1)
 				else
 					draw.DrawText(v:Name(), "Trebuchet18", plypos.x, plypos.y, Color(255,255,255), 1)
@@ -140,3 +141,5 @@ local function lenny_espconfig_open()
 	espconfig_frame:SetVisible(true)
 	updatelist()
 end
+
+concommand.Add("lenny_espopen", lenny_espconfig_open)

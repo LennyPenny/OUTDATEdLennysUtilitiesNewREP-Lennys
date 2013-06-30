@@ -25,7 +25,7 @@ function GetConVarNumber( name )
 	end
 end
 
-print("Anti-Anticheat works if everythig is 0. sv_allowcslua: "..GetConVarNumber("sv_allowcslua ").." sv_cheats: "..GetConVarNumber("sv_cheats").." host_timescale:  "..GetConVarNumber("host_timescale"))
+print("Worst Anti-Anticheat works if everythig is 0. sv_allowcslua: "..GetConVarNumber("sv_allowcslua ").." sv_cheats: "..GetConVarNumber("sv_cheats").." host_timescale:  "..GetConVarNumber("host_timescale").."host_timescale has to be 0, lol")
 
 local GetTable = hook.GetTable;
 
@@ -131,12 +131,7 @@ chatspamcheckbox.DoClick = function()
 end
 chatspamcheckbox:SizeToContents()
 
-
-
-
 concommand.Add("lenny_menu", lenny_Menu)
-concommand.Add("lenny_espconfig", lenny_espconfig_open)
-
 
 function lenny_Menu()
 	MainWindow:SetVisible(true)
