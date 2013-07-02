@@ -3,35 +3,28 @@
     local Offset = Vector(0, 0, 32)
     local Trace = {}
 
+
+    timer.Create("lol", .5, 0, function()
+        Witnesses = 0
+        BeingWitnessed = false
+        for k, pla in pairs(player.GetAll()) do
+            if pla:IsValid() and pla != LocalPlayer() then
+                Trace.start  = LocalPlayer():EyePos() + Offset
+                Trace.endpos = pla:EyePos() + Offset
+                Trace.filter = {pla, LocalPlayer()}
+                TraceRes = util.TraceLine(Trace)
+                if !TraceRes.Hit then
+                    if (pla:EyeAngles():Forward():Dot((LocalPlayer():EyePos() - pla:EyePos())) > Cap) then
+                        Witnesses = Witnesses + 1
+                        BeingWitnessed = true
+                    end
+                end
+            end
+        end
+    end)
+
+
     function Draw()
-    	local Time = os.time() - 1
-    	local Witnesses = 0
-    	local BeingWitnessed = true
-    	local Texture = surface.GetTextureID("gui/silkicons/emoticon_smile")
-
-    	if Time < os.time() then
-    		Time = os.time() + .5
-    		Witnesses = 0
-    		BeingWitnessed = false
-    		for k, pla in pairs(player.GetAll()) do
-    			if pla:IsValid() and pla != LocalPlayer() then
-    				Trace.start  = LocalPlayer():EyePos() + Offset
-    				Trace.endpos = pla:EyePos() + Offset
-    				Trace.filter = {pla, LocalPlayer()}
-
-    				TraceRes = util.TraceLine(Trace)
-
-    				if !TraceRes.Hit then
-    					if (pla:EyeAngles():Forward():Dot((LocalPlayer():EyePos() - pla:EyePos())) > Cap) then
-    						Witnesses = Witnesses + 1
-    						BeingWitnessed = true
-
-    					end
-    				end
-    			end
-    		end
-    	end
-
     	surface.SetFont("BudgetLabel")
     	if BeingWitnessed then
     		surface.SetTextColor(255, 000, 000, 255)
