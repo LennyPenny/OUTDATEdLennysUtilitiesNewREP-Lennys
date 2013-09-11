@@ -3,10 +3,9 @@ CreateClientConVar("lenny_pkill_prop", "models/props_c17/furnitureStove001a.mdl"
 CreateClientConVar("lenny_pkill_remover", 0.5)
 
 local function propkill()
-	local lastwep = "weapon_physgun"
 	local atttime = 0
 	if LocalPlayer():GetActiveWeapon():GetClass() != "weapon_physgun" then
-		lastwep = LocalPlayer():GetActiveWeapon()
+		local lastwep = LocalPlayer():GetActiveWeapon()
 		RunConsoleCommand("use", "weapon_physgun")
 		atttime = 0.2
 		timer.Simple(.3, function()
