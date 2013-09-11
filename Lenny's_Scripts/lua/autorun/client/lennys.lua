@@ -1,4 +1,3 @@
-CreateClientConVar("lenny_cvar3", 0, true, false)
 local function ReloadLennys()
 	include("autorun/client/Lennys.lua")
 end
@@ -47,13 +46,6 @@ end
 local files, folders = file.Find("lua/Lenny/*.lua", "GAME")
 for k, v in pairs(files) do
 	include("Lenny/" .. v)
-end
-
-local files2, folders2 = file.Find("lua/lennycvar3/*.lua", "GAME")
-for k, v in pairs(files2) do
-	if GetConVarNumber("lenny_cvar3") == 1 then
-		include("lennycvar3/" .. v)
-	end
 end
 
 
